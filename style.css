@@ -39,6 +39,8 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   background: var(--bg);
+  /* Hapus scroll padding agar section tidak tertutup navbar */
+  scroll-padding-top: 82px;
 }
 body {
   font-family: Inter, sans-serif;
@@ -49,6 +51,9 @@ body {
   transition:
     background 0.4s,
     color 0.4s;
+  /* GPU layer untuk body agar compositing lebih efisien */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -146,15 +151,23 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  height: 82px;
+  height: 64px;
   z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(22px, 5vw, 76px);
+  padding: 0 clamp(16px, 5vw, 76px);
   backdrop-filter: blur(18px);
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(18px);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
   border-bottom: 1px solid var(--line);
+  will-change: transform;
+  contain: layout style;
+}
+@media (min-width: 851px) {
+  .navbar {
+    height: 82px;
+  }
 }
 .logo {
   font: 700 27px "Space Grotesk";
@@ -247,14 +260,15 @@ button {
   position: relative;
 }
 .hero {
-  padding-top: 160px;
+  padding-top: clamp(100px, 12vh, 140px);
+  padding-bottom: 40px;
   display: flex;
   align-items: center;
-  min-height: 100svh;
+  min-height: auto;
 }
 .hero.section {
-  min-height: 100svh;
-  padding-bottom: 20px;
+  min-height: auto;
+  padding-bottom: 40px;
 }
 .hero-grid {
   max-width: 1320px;
@@ -265,7 +279,7 @@ button {
   grid-template-areas:
     "top visual"
     "bottom visual";
-  gap: 70px;
+  gap: clamp(24px, 4vw, 60px);
   align-items: center;
 }
 .hero-top {
@@ -313,14 +327,14 @@ button {
 }
 
 .hello {
-  margin-top: 24px;
-  font-size: 18px;
+  margin-top: 20px;
+  font-size: clamp(15px, 2vw, 18px);
   color: var(--muted);
 }
 .hero h1 {
-  font: 700 clamp(48px, 10vw, 142px)/0.9 "Space Grotesk";
-  letter-spacing: clamp(-4px, -0.5vw, -7px);
-  margin: 10px 0 25px;
+  font: 700 clamp(44px, 7.5vw, 115px)/0.92 "Space Grotesk";
+  letter-spacing: clamp(-3px, -0.4vw, -6px);
+  margin: 10px 0 22px;
   color: var(--text);
 }
 .hero h1 span {
@@ -355,7 +369,7 @@ button {
   flex-wrap: wrap;
 }
 .btn {
-  padding: 15px 25px;
+  padding: 13px 22px;
   border-radius: 14px;
   border: 1px solid var(--line);
   cursor: pointer;
@@ -366,11 +380,18 @@ button {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  /* Minimal tap target 44px */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition:
-    color 0.4s ease,
-    transform 0.3s ease,
-    border-color 0.4s ease,
-    box-shadow 0.4s ease;
+    color 0.35s ease,
+    transform 0.25s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+  /* GPU compositing */
+  will-change: transform;
 }
 .btn span {
   margin-left: 12px;
@@ -389,39 +410,58 @@ button {
   background: var(--purple);
   z-index: -1;
   transform: translateX(-101%);
-  transition: transform 0.4s ease-out;
+  transition: transform 0.35s ease-out;
 }
-.btn:hover {
-  color: #ffffff;
-  border-color: var(--purple);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+@media (hover: hover) {
+  .btn:hover {
+    color: #ffffff;
+    border-color: var(--purple);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+  }
+  .btn:hover::before {
+    transform: translateX(0);
+  }
 }
-.btn:hover::before {
-  transform: translateX(0);
+/* Touch feedback */
+.btn:active {
+  transform: scale(0.97);
 }
 .socials {
   display: flex;
   gap: 10px;
-  margin-top: 38px;
+  margin-top: 32px;
+  flex-wrap: wrap;
 }
 .socials a {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
   font-size: 11px;
   font-weight: 800;
-  transition: 0.3s;
+  transition:
+    background 0.3s,
+    transform 0.25s,
+    color 0.25s;
   color: var(--text);
   overflow: hidden;
+  /* GPU compositing */
+  will-change: transform;
 }
-.socials a:hover {
+@media (hover: hover) {
+  .socials a:hover {
+    background: var(--purple);
+    color: var(--on-purple);
+    transform: translateY(-4px) rotate(8deg);
+  }
+}
+.socials a:active {
+  transform: scale(0.9);
   background: var(--purple);
   color: var(--on-purple);
-  transform: translateY(-4px) rotate(8deg);
 }
 .socials img.wa {
   width: 100%;
@@ -461,6 +501,8 @@ button {
   position: relative;
   display: grid;
   place-items: center;
+  /* Prevent visual from causing overflow */
+  overflow: visible;
 }
 .profile-card {
   width: min(390px, 92%);
@@ -474,6 +516,9 @@ button {
   position: relative;
   z-index: 2;
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  /* GPU compositing - no layout recalc during animation */
+  will-change: transform;
 }
 .profile-photo {
   aspect-ratio: 4/5;
@@ -1295,33 +1340,33 @@ footer {
   display: block;
 }
 .badge-proteus {
-  top: 10%;
-  left: 25%;
+  top: 6%;
+  left: 14%;
   animation-delay: 0.2s;
 }
 .badge-excel {
-  top: 10%;
-  right: 25%;
+  top: 6%;
+  right: 14%;
   animation-delay: 0.6s;
 }
 .badge-cisco {
   top: 42%;
-  right: 8%;
+  right: 1%;
   animation-delay: 1s;
 }
 .badge-vscode {
-  bottom: 10%;
-  right: 25%;
+  bottom: 6%;
+  right: 14%;
   animation-delay: 1.4s;
 }
 .badge-canva {
-  bottom: 10%;
-  left: 25%;
+  bottom: 6%;
+  left: 14%;
   animation-delay: 1.8s;
 }
 .badge-arduinoide {
   top: 42%;
-  left: 8%;
+  left: 1%;
   animation-delay: 2.2s;
 }
 .skill-list {
@@ -1780,19 +1825,28 @@ footer {
   .nav-links {
     display: none;
     position: absolute;
-    top: 82px;
+    top: 64px;
     left: 0;
     right: 0;
     margin: 0;
-    padding: 25px;
+    padding: 20px 22px;
     flex-direction: column;
     background: var(--surface-solid);
     border-bottom: 1px solid var(--line);
-    gap: 18px;
+    gap: 16px;
     z-index: 49;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
   .nav-links.open {
     display: flex;
+    animation: navSlideDown 0.22s ease both;
+  }
+  .nav-links a {
+    font-size: 15px;
+    padding: 6px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
   .menu-toggle {
     display: grid;
@@ -1803,173 +1857,309 @@ footer {
       "top"
       "visual"
       "bottom";
-    gap: 24px;
+    gap: 20px;
   }
   .hero-bottom {
     margin-top: 0;
   }
   .hero {
-    padding-top: 110px;
+    padding-top: 90px;
+    min-height: auto;
+    padding-bottom: 60px;
+  }
+  .hero.section {
+    min-height: auto;
+  }
+  /* Profile card: ringan — hanya transform translateY di GPU */
+  .profile-card {
+    animation: floatMobile 4s ease-in-out infinite;
+    transform: rotate(2deg);
+    will-change: transform;
   }
   .hero-visual {
-    min-height: 420px;
+    min-height: auto;
     margin-top: 0;
+    padding: 24px 0 8px;
+    overflow: hidden;
   }
   .orbit-two {
-    width: 440px;
-    height: 440px;
+    width: 380px;
+    height: 380px;
   }
   .orbit-one {
-    width: 340px;
-    height: 340px;
+    width: 290px;
+    height: 290px;
   }
   .about-layout {
     padding-top: 0;
   }
   .project-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
   .gallery {
     grid-template-columns: 1fr 1fr;
   }
-  /* Disable heavy floating animation on mobile for performance */
-  .profile-card {
-    animation: none;
-    transform: rotate(2deg);
-  }
+  /* Reduce blobs for GPU performance */
   .blob-a {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
+    filter: blur(80px);
   }
   .blob-b {
-    width: 260px;
-    height: 260px;
+    width: 240px;
+    height: 240px;
+    filter: blur(80px);
   }
   .blob-c {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
+    filter: blur(80px);
   }
 }
 
+/* ── 640px: Medium mobile ── */
 @media (max-width: 640px) {
-  .project-grid {
-    grid-template-columns: 1fr;
+  html {
+    scroll-padding-top: 64px;
+  }
+
+  .section {
+    padding: 86px 20px 48px;
+  }
+  .hero.section {
+    padding-top: 82px;
+    padding-bottom: 48px;
+  }
+  .hero-grid {
+    gap: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 12vw, 72px);
+    letter-spacing: clamp(-3px, -0.6vw, -5px);
+    margin-bottom: 18px;
+  }
+  .hero h2 {
+    font-size: clamp(17px, 4.5vw, 26px);
+    min-height: 42px;
+  }
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .hello {
+    font-size: 15px;
+    margin-top: 16px;
   }
   .hero-visual {
-    min-height: 360px;
+    min-height: auto;
+  }
+  .profile-card {
+    width: min(300px, 78vw);
   }
   .orbit-two {
-    width: 360px;
-    height: 360px;
+    width: 330px;
+    height: 330px;
   }
   .orbit-one {
-    width: 280px;
-    height: 280px;
+    width: 250px;
+    height: 250px;
   }
-  /* Skill stage on small phones: show as flat list instead of scaled stage */
+  .floating-tag {
+    font-size: 9px;
+    padding: 8px 12px;
+  }
+  .tag-one {
+    left: 1%;
+    top: 10%;
+  }
+  .tag-two {
+    right: 1%;
+    bottom: 10%;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(32px, 9vw, 55px);
+    letter-spacing: clamp(-2.5px, -0.4vw, -4px);
+    margin: 14px 0 20px;
+  }
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* ── Skills: pertahankan tampilan orbital asli, perbaiki posisi ──
+     Semua badge tetap position:absolute seperti desktop.
+     Penyesuaian: geser badge lebih ke tengah (jauh dari tepi),
+     lalu scale seluruh stage agar muat di viewport.              */
+
   .skills-stage {
-    min-height: 480px;
-    transform: scale(0.82);
-    width: 122%;
-    margin-left: -11%;
-    overflow: visible;
+    min-height: 480px !important;
+    transform: scale(0.74) !important;
+    transform-origin: top center !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-bottom: -125px !important;
+    overflow: visible !important;
+    /* Kembalikan ke grid (seperti desktop) */
+    display: grid !important;
+    place-items: center !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
   }
+
+  /* Badge: kembalikan ke absolute (sama seperti desktop) */
   .skill-badge {
-    width: 72px;
-    height: 72px;
-    animation: none;
+    position: absolute !important;
+    width: 84px !important;
+    height: 84px !important;
+    animation: none !important;
     transform: none !important;
   }
-  .badge-proteus  { top: 10%; left: 16%; }
-  .badge-excel    { top: 10%; right: 16%; }
-  .badge-arduinoide { top: 43%; left: 3%; }
-  .badge-cisco    { top: 43%; right: 3%; }
-  .badge-canva    { bottom: 10%; left: 16%; }
-  .badge-vscode   { bottom: 10%; right: 16%; }
+  .skill-badge:active {
+    transform: scale(0.93) !important;
+  }
+  .skill-badge::after {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(4px) !important;
+  }
+
+  /* Reposisi badge: geser makin jauh ke kiri & kanan */
+  .badge-proteus {
+    top: 3%;
+    left: 7%;
+    right: auto;
+    bottom: auto;
+  }
+  .badge-excel {
+    top: 3%;
+    right: 7%;
+    left: auto;
+    bottom: auto;
+  }
+  .badge-arduinoide {
+    top: 42%;
+    left: -15%;
+    right: auto;
+    bottom: auto;
+  }
+  .badge-cisco {
+    top: 42%;
+    right: -15%;
+    left: auto;
+    bottom: auto;
+  }
+  .badge-canva {
+    bottom: 3%;
+    left: 7%;
+    right: auto;
+    top: auto;
+  }
+  .badge-vscode {
+    bottom: 3%;
+    right: 7%;
+    left: auto;
+    top: auto;
+  }
+
+  /* Center panel tetap di tengah, ukuran proporsional agar tidak menempel badge */
   .skills-center {
-    width: 160px;
-    height: 160px;
+    position: relative !important;
+    width: 175px !important;
+    height: 175px !important;
+    animation: centerFloat 4s ease-in-out infinite !important;
+    flex: unset !important;
+    order: unset !important;
+  }
+  .skills-center-face {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .gear-main-bg {
+    display: block !important;
+  }
+  .skills-center-default {
+    display: flex !important;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease !important;
+  }
+  .skills-center-info {
+    opacity: 0 !important;
+    transform: scale(0.82) !important;
+    position: absolute !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    pointer-events: none !important;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease !important;
+  }
+  .skills-center.active .skills-center-default {
+    opacity: 0 !important;
+    transform: scale(0.82) !important;
+    pointer-events: none !important;
+  }
+  .skills-center.active .skills-center-info {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+    pointer-events: auto !important;
   }
   .skills-center strong {
     font-size: 22px;
   }
   .skills-center-info-card {
-    width: 128px;
-    padding: 14px 12px;
+    width: 160px;
+    padding: 14px 10px;
     border-radius: 20px;
+    background: color-mix(in srgb, var(--surface-solid) 92%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: unset;
+    min-height: unset;
+    flex-direction: unset;
   }
   .skills-center-info-title {
-    font-size: 10px;
-    margin-bottom: 6px;
+    font-size: 11px;
   }
   .skills-center-info-desc {
     font-size: 10px;
     line-height: 1.5;
   }
-}
+  .skills-connector-line {
+    display: block !important;
+  }
 
-@media (max-width: 480px) {
-  body {
-    overflow-x: hidden;
-  }
-  .section {
-    padding: 80px 18px 40px;
-  }
-  .hero.section {
-    padding-top: 100px;
-    padding-bottom: 50px;
-  }
-  .hero h1 {
-    font-size: clamp(40px, 12vw, 64px);
-    letter-spacing: -3px;
-  }
-  .hero h2 {
-    font-size: clamp(16px, 4.5vw, 24px);
-    min-height: 40px;
-  }
-  .hero-visual {
-    min-height: 300px;
-  }
-  .hero-grid {
-    gap: 14px;
-  }
-  .profile-card {
-    width: min(270px, 82vw);
-    animation: none;
-    transform: rotate(1deg);
-  }
-  .orbit-one {
-    width: 240px;
-    height: 240px;
-  }
-  .orbit-two {
-    width: 300px;
-    height: 300px;
-  }
-  .floating-tag {
-    font-size: 9px;
-    padding: 8px 11px;
-  }
-  .tag-one {
-    left: 0;
-    top: 12%;
-  }
-  .tag-two {
-    right: 0;
-    bottom: 14%;
+  /* About carousel: hilangkan ampas potongan kartu di kanan-kiri pada tampilan mobile */
+  .about-carousel-stage {
+    overflow: hidden;
   }
   .about-carousel-ring {
     --radius: clamp(100px, 28vw, 130px);
   }
   .about-carousel-item {
-    width: clamp(150px, 46vw, 185px);
-    height: clamp(210px, 58vw, 245px);
-    margin: calc(clamp(210px, 58vw, 245px) / -2) 0 0
-      calc(clamp(150px, 46vw, 185px) / -2);
-    padding: 9px;
+    width: clamp(170px, 52vw, 200px);
+    height: clamp(230px, 64vw, 270px);
+    margin: calc(clamp(230px, 64vw, 270px) / -2) 0 0
+      calc(clamp(170px, 52vw, 200px) / -2);
+    padding: 10px;
+  }
+  .about-carousel-item:not(.is-active) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    filter: none !important;
   }
   .about-carousel-controls {
-    margin-top: 10px;
+    margin-top: 12px;
   }
   .about-carousel-caption strong {
     font-size: 11px;
@@ -1986,33 +2176,31 @@ footer {
     white-space: nowrap;
   }
   .carousel-detail-btn span[aria-hidden] {
-    font-size: 12px;
+    font-size: 13px;
   }
-  .section-heading h2 {
-    letter-spacing: -2px;
-    font-size: clamp(30px, 9vw, 48px);
-  }
+
   .gallery {
     grid-template-columns: 1fr;
   }
-  .doc-arc-item {
-    flex-basis: 140px;
-    width: 140px;
-  }
+
+  /* Modal → bottom sheet */
   .modal {
-    padding: 8px;
+    padding: 0;
     align-items: flex-end;
   }
   .modal-panel {
-    padding: 20px 16px;
-    border-radius: 20px 20px 0 0;
-    max-height: 96vh;
+    padding: 22px 18px 32px;
+    border-radius: 24px 24px 0 0;
+    max-height: 94vh;
     width: 100%;
+    border-bottom: none;
+    animation: sheetUp 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .modal-head h2 {
-    font-size: clamp(24px, 6vw, 40px);
+    font-size: clamp(22px, 5.5vw, 38px);
     letter-spacing: -2px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    margin-top: 6px;
   }
   .modal-close {
     right: 14px;
@@ -2022,44 +2210,184 @@ footer {
     font-size: 20px;
   }
   .project-gallery-track .gallery-item {
-    flex: 0 0 200px !important;
-    width: 200px !important;
-    height: 155px !important;
+    flex: 0 0 195px !important;
+    width: 195px !important;
+    height: 150px !important;
   }
-  .doc-panel {
+  .doc-panel,
+  .doc-detail-panel {
     max-width: 100%;
   }
   .doc-arc {
-    padding: 30px 16px 20px;
+    padding: 28px 14px 18px;
     gap: 12px;
+  }
+  .doc-arc-item {
+    flex-basis: 140px;
+    width: 140px;
   }
   .doc-nav {
     width: 36px;
     height: 36px;
     font-size: 14px;
   }
-  .doc-detail-panel {
-    max-width: 100%;
-  }
+
   footer {
     flex-direction: column;
     gap: 8px;
-    padding: 20px 18px;
+    padding: 20px;
     text-align: center;
   }
   .footer-brand {
     font-size: 18px;
   }
-  /* Skills stage on very small phones */
+}
+
+/* ── 390px: Very small phones ── */
+@media (max-width: 390px) {
+  .section {
+    padding: 80px 16px 40px;
+  }
+  .hero.section {
+    padding-top: 78px;
+    padding-bottom: 40px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 13vw, 50px);
+    letter-spacing: -2.5px;
+  }
+  .hero h2 {
+    font-size: clamp(15px, 4.5vw, 20px);
+    min-height: 36px;
+  }
+  .hero-description {
+    font-size: 13.5px;
+  }
+  .profile-card {
+    width: min(250px, 80vw);
+  }
+  .btn {
+    padding: 11px 18px;
+    font-size: 12px;
+  }
+  .hero-buttons {
+    gap: 8px;
+  }
+  .orbit-one {
+    width: 210px;
+    height: 210px;
+  }
+  .orbit-two {
+    width: 270px;
+    height: 270px;
+  }
+  .floating-tag {
+    display: none;
+  }
+  .section-heading h2 {
+    font-size: clamp(26px, 10vw, 38px);
+    letter-spacing: -1.5px;
+  }
+  /* Skills: scale lebih kecil, posisi badge sama */
   .skills-stage {
-    min-height: 420px;
-    transform: scale(0.75);
-    width: 133%;
-    margin-left: -16.5%;
-    overflow: visible;
+    transform: scale(0.64) !important;
+    margin-bottom: -175px !important;
+  }
+  .modal-panel {
+    padding: 18px 14px 28px;
   }
 }
 
+/* ═══════════════════════════════════════════════
+   Keyframes
+═══════════════════════════════════════════════ */
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes sheetUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: rotate(3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1deg) translateY(-14px);
+  }
+}
+/* floatMobile: hanya translateY — GPU-only, zero layout cost.
+   Rotasi tetap konstan sehingga browser tidak perlu recalc apapun. */
+@keyframes floatMobile {
+  0%,
+  100% {
+    transform: rotate(2deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-10px);
+  }
+}
+@keyframes blobFloat {
+  50% {
+    transform: translate(60px, -40px) scale(1.08);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes pulse {
+  50% {
+    transform: scale(1.3) rotate(20deg);
+    opacity: 0.45;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes cardSwitch {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 @keyframes logoPulse {
   50% {
     transform: translateY(-2px) rotate(-5deg);

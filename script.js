@@ -4,6 +4,7 @@ const themeToggle = document.getElementById("themeToggle");
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 const cursorGlow = document.querySelector(".cursor-glow");
+const navbar = document.querySelector(".navbar");
 
 const prefersDark =
   window.matchMedia &&
@@ -20,10 +21,37 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("portofolio-theme", htmlEl.dataset.theme);
 });
 
-menuToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-document.querySelectorAll(".nav-links a").forEach((link) => {
-  link.addEventListener("click", () => navLinks.classList.remove("open"));
+// Dynamic scroll-padding = actual navbar height (adapts on resize)
+function updateScrollPadding() {
+  const h = navbar ? navbar.offsetHeight : 64;
+  htmlEl.style.scrollPaddingTop = h + "px";
+}
+updateScrollPadding();
+window.addEventListener("resize", updateScrollPadding, { passive: true });
+
+// Toggle mobile menu
+menuToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", navLinks.classList.contains("open"));
 });
+// Close menu when a link is clicked
+document.querySelectorAll(".nav-links a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
+// Close menu when clicking outside on mobile
+document.addEventListener("click", (e) => {
+  if (navLinks.classList.contains("open") &&
+      !navLinks.contains(e.target) &&
+      !menuToggle.contains(e.target)) {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+});
+
 
 // Cursor glow: only activate on non-touch (pointer: fine) devices
 const isTouchDevice = window.matchMedia('(hover: none)').matches;
@@ -563,28 +591,43 @@ function updateSkillsConnector(badge) {
     ? cardEl.getBoundingClientRect()
     : skillsCenter.getBoundingClientRect();
 
-  const ax = badgeRect.left + badgeRect.width / 2 - stageRect.left;
-  const ay = badgeRect.top + badgeRect.height / 2 - stageRect.top;
-  const bx = cardRect.left + cardRect.width / 2 - stageRect.left;
-  const by = cardRect.top + cardRect.height / 2 - stageRect.top;
+  // Detect scale factor of skillsStage (due to CSS transform: scale(...))
+  const scaleX =
+    skillsStage.offsetWidth > 0
+      ? stageRect.width / skillsStage.offsetWidth
+      : 1;
+  const scaleY =
+    skillsStage.offsetHeight > 0
+      ? stageRect.height / skillsStage.offsetHeight
+      : 1;
+
+  // Convert screen coordinates to stage-local unscaled coordinates
+  const ax = (badgeRect.left + badgeRect.width / 2 - stageRect.left) / scaleX;
+  const ay = (badgeRect.top + badgeRect.height / 2 - stageRect.top) / scaleY;
+  const bx = (cardRect.left + cardRect.width / 2 - stageRect.left) / scaleX;
+  const by = (cardRect.top + cardRect.height / 2 - stageRect.top) / scaleY;
+
   const dx = bx - ax;
   const dy = by - ay;
-  const fullDist = Math.sqrt(dx * dx + dy * dy) || 1;
+  const fullDist = Math.hypot(dx, dy) || 1;
   const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
   const ux = dx / fullDist;
   const uy = dy / fullDist;
 
-  // Use each element's own (untransformed) layout size for the box half
-  // extents, so the touch point stays correct even mid cross-fade/scale
-  // transition on the center card.
+  // Use each element's unscaled layout size for half extents
   const badgeHalfW = badge.offsetWidth / 2;
   const badgeHalfH = badge.offsetHeight / 2;
-  const cardHalfW = (cardEl ? cardEl.offsetWidth : cardRect.width) / 2;
-  const cardHalfH = (cardEl ? cardEl.offsetHeight : cardRect.height) / 2;
+  const cardHalfW =
+    (cardEl ? cardEl.offsetWidth : cardRect.width / scaleX) / 2;
+  const cardHalfH =
+    (cardEl ? cardEl.offsetHeight : cardRect.height / scaleY) / 2;
 
   const start = rectEdgePoint(ax, ay, badgeHalfW, badgeHalfH, ux, uy);
   const end = rectEdgePoint(bx, by, cardHalfW, cardHalfH, -ux, -uy);
-  const trimmedDist = Math.max(0, Math.hypot(end.x - start.x, end.y - start.y));
+  const trimmedDist = Math.max(
+    0,
+    Math.hypot(end.x - start.x, end.y - start.y),
+  );
 
   skillsConnectorLine.style.width = `${trimmedDist}px`;
   skillsConnectorLine.style.left = `${start.x}px`;
@@ -616,6 +659,7 @@ document.querySelectorAll(".skill-badge").forEach((badge) => {
     }
     if (skillsCenter) skillsCenter.classList.add("active");
     updateSkillsConnector(badge);
+    requestAnimationFrame(() => updateSkillsConnector(badge));
     if (skillsConnectorLine) skillsConnectorLine.classList.add("visible");
   });
 });
