@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portofolio pribadi modern dan interaktif."
+    />
+    <title>Portofolio | M. Rafli Saputra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/profile.jpg"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="cursor-glow"></div>
+    <div class="bg-decor" aria-hidden="true">
+      <span class="bg-blob blob-a"></span>
+      <span class="bg-blob blob-b"></span>
+      <span class="bg-blob blob-c"></span>
+      <span class="bg-grid"></span>
+    </div>
+
+    <header class="navbar">
+      <a href="#home" class="logo word-logo"
+        ><span class="logo-letter">p</span>ortofolio</a
+      >
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Project</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Ganti mode">
+          ☾
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HOME -->
+      <section id="home" class="hero section">
+        <div class="hero-grid">
+          <div class="hero-top reveal">
+            <div class="eyebrow">
+              <span class="status-dot"></span> READY TO BE WORKERS
+            </div>
+            <p class="hello">Perkenalkan, saya</p>
+            <h1>M. Rafli <span>Saputra</span></h1>
+            <h2>
+              <span id="typingText"></span><span class="typing-cursor">|</span>
+            </h2>
+          </div>
+
+          <div class="hero-bottom reveal">
+            <p class="hero-description">
+              Fresh Graduate Teknik Komputer dari Politekknik Negeri Sriwijaya
+              yang memiliki pengetahuan dan keterampilan dasar di bidang
+              teknologi informasi seperti jaringan komputer, pemrograman
+              berbasis web, basis data, administrasi, pemeliharaan komputer dan
+              Internet of Things (IoT).
+            </p>
+
+            <div class="hero-buttons">
+              <a class="btn primary" href="#projects"> Lihat Project </a>
+              <a
+                class="btn secondary"
+                id="cvButton"
+                href="https://drive.google.com/file/d/1qbjybeds8G4-1MhdwonuG-dwgGRhKB9U/preview"
+                target="_blank"
+              >
+                Lihat CV
+              </a>
+            </div>
+
+            <div class="socials">
+              <a
+                href="https://instagram.com/saputrars14"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+              >
+                <img
+                  class="instagram"
+                  src="assets/social/instagram.png"
+                  alt="Instagram"
+                  width="40"
+                  height="40"
+                  decoding="async"
+                  onerror="
+                    this.style.display = 'none';
+                    this.parentElement.classList.add('icon-fallback');
+                  "
+                /><span class="icon-fallback-text">IG</span>
+              </a>
+              <a
+                href="https://wa.me/6285268484235"
+                target="_blank"
+                rel="noopener"
+                aria-label="WhatsApp"
+              >
+                <img
+                  class="wa"
+                  src="assets/social/whatsapp.png"
+                  alt="WhatsApp"
+                  width="40"
+                  height="40"
+                  decoding="async"
+                  onerror="
+                    this.style.display = 'none';
+                    this.parentElement.classList.add('icon-fallback');
+                  "
+                /><span class="icon-fallback-text">WA</span>
+              </a>
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=raflisaputra1406@gmail.com"
+                target="_blank"
+                rel="noopener"
+                aria-label="Email"
+              >
+                <img
+                  class="email"
+                  src="assets/social/email.png"
+                  alt="Email"
+                  width="40"
+                  height="40"
+                  decoding="async"
+                  onerror="
+                    this.style.display = 'none';
+                    this.parentElement.classList.add('icon-fallback');
+                  "
+                /><span class="icon-fallback-text">@</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/m-rafli-saputra"
+                target="_blank"
+                rel="noopener"
+                aria-label="Link"
+              >
+                <img
+                  src="assets/social/link.png"
+                  class="link"
+                  alt="Linkedin"
+                  width="40"
+                  height="40"
+                  decoding="async"
+                  onerror="
+                    this.style.display = 'none';
+                    this.parentElement.classList.add('icon-fallback');
+                  "
+                /><span class="icon-fallback-text">🔗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal delay-1">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="floating-tag tag-one">Enginnering</div>
+            <div class="floating-tag tag-two">Computer</div>
+            <div class="profile-card">
+              <div class="profile-photo" id="profilePhoto">
+                <button
+                  type="button"
+                  class="photo-flip-btn"
+                  id="photoFlipBtn"
+                  aria-label="Ganti foto profil"
+                >
+                  ⟲
+                </button>
+                <div class="photo-flip-inner">
+                  <div class="photo-face photo-face-front">
+                    <!-- Ganti src dengan foto kamu -->
+                    <img
+                      src="assets/profile.jpg"
+                      alt="Foto profil"
+                      fetchpriority="high"
+                      decoding="async"
+                      width="366"
+                      height="457"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.parentElement.parentElement.classList.add(
+                          'photo-placeholder',
+                        );
+                      "
+                    />
+                  </div>
+                  <div class="photo-face photo-face-back">
+                    <!-- Ganti src dengan foto kedua kamu -->
+                    <img
+                      src="assets/profile-2.jpg"
+                      alt="Foto profil alternatif"
+                      loading="lazy"
+                      decoding="async"
+                      width="366"
+                      height="457"
+                      onerror="this.style.display = 'none'"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="profile-card-bottom">
+                <span>Rafli</span>
+                <span>PORTOFOLIO</span>
+              </div>
+            </div>
+            <div class="sparkle s1">✦</div>
+            <div class="sparkle s2">✧</div>
+            <div class="sparkle s3">✦</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section about-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">01 — ABOUT ME</p>
+          <h2>Profil dan<br /><em>Perjalanan Saya.</em></h2>
+        </div>
+
+        <div class="about-layout">
+          <div class="about-carousel-wrap reveal delay-1">
+            <div
+              class="about-carousel-stage"
+              id="aboutCarouselStage"
+              tabindex="0"
+              aria-label="Carousel kategori profil, gunakan tombol panah untuk menavigasi"
+            >
+              <div class="about-carousel-ring" id="aboutCarouselRing">
+                <div
+                  class="about-carousel-item is-active"
+                  data-about="education"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Lihat kategori Pendidikan"
+                  style="--item-angle: 0deg"
+                >
+                  <div class="about-visual-photo">
+                    <!-- Ganti src sesuai kategori (gunakan foto horizontal/landscape) -->
+                    <img
+                      src="assets/about/education.jpg"
+                      alt="Foto Pendidikan"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.classList.add('photo-placeholder');
+                      "
+                    />
+                  </div>
+                  <div class="about-carousel-caption">
+                    <strong>Pendidikan</strong>
+                    <button
+                      type="button"
+                      class="carousel-detail-btn"
+                      data-about="education"
+                    >
+                      <span class="btn-label">Selengkapnya</span
+                      ><span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="about-carousel-item"
+                  data-about="experience"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Lihat kategori Pengalaman"
+                  style="--item-angle: 72deg"
+                >
+                  <div class="about-visual-photo">
+                    <img
+                      src="assets/about/experience.jpg"
+                      alt="Foto Pengalaman"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.classList.add('photo-placeholder');
+                      "
+                    />
+                  </div>
+                  <div class="about-carousel-caption">
+                    <strong>Pengalaman</strong>
+                    <button
+                      type="button"
+                      class="carousel-detail-btn"
+                      data-about="experience"
+                    >
+                      <span class="btn-label">Selengkapnya</span
+                      ><span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="about-carousel-item"
+                  data-about="achievement"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Lihat kategori Pencapaian"
+                  style="--item-angle: 144deg"
+                >
+                  <div class="about-visual-photo">
+                    <img
+                      src="assets/about/achievement.jpg"
+                      alt="Foto Pencapaian"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.classList.add('photo-placeholder');
+                      "
+                    />
+                  </div>
+                  <div class="about-carousel-caption">
+                    <strong>Pencapaian</strong>
+                    <button
+                      type="button"
+                      class="carousel-detail-btn"
+                      data-about="achievement"
+                    >
+                      <span class="btn-label">Selengkapnya</span
+                      ><span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="about-carousel-item"
+                  data-about="training"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Lihat kategori Pelatihan"
+                  style="--item-angle: 216deg"
+                >
+                  <div class="about-visual-photo">
+                    <img
+                      src="assets/about/training.jpg"
+                      alt="Foto Pelatihan"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.classList.add('photo-placeholder');
+                      "
+                    />
+                  </div>
+                  <div class="about-carousel-caption">
+                    <strong>Pelatihan</strong>
+                    <button
+                      type="button"
+                      class="carousel-detail-btn"
+                      data-about="training"
+                    >
+                      <span class="btn-label">Selengkapnya</span
+                      ><span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="about-carousel-item"
+                  data-about="certificate"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Lihat kategori Sertifikat"
+                  style="--item-angle: 288deg"
+                >
+                  <div class="about-visual-photo">
+                    <img
+                      src="assets/about/certificate.jpg"
+                      alt="Foto Sertifikat"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="
+                        this.style.display = 'none';
+                        this.parentElement.classList.add('photo-placeholder');
+                      "
+                    />
+                  </div>
+                  <div class="about-carousel-caption">
+                    <strong>Sertifikat</strong>
+                    <button
+                      type="button"
+                      class="carousel-detail-btn"
+                      data-about="certificate"
+                    >
+                      <span class="btn-label">Selengkapnya</span
+                      ><span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="about-carousel-floor"></div>
+            </div>
+
+            <div class="about-carousel-controls">
+              <button
+                class="carousel-nav prev"
+                id="aboutPrev"
+                aria-label="Kategori sebelumnya"
+              >
+                ‹
+              </button>
+              <div class="about-dots" id="aboutDots"></div>
+              <button
+                class="carousel-nav next"
+                id="aboutNext"
+                aria-label="Kategori berikutnya"
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS / TOOLS -->
+      <section id="skills" class="section skills-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">02 — Skills</p>
+          <h2>Aplikasi<br /><em>digunakan.</em></h2>
+        </div>
+
+        <div class="skills-stage reveal">
+          <div class="skills-connector-line" id="skillsConnectorLine"></div>
+          <button
+            class="skill-badge badge-proteus"
+            data-skill="proteus"
+            data-label="PROTEUS"
+            data-title="PROTEUS"
+            data-desc="Mensimulasikan rangkaian elektronik dan melakukan wiring sebelum pengujian hardware"
+          >
+            <span class="skill-icon"
+              ><img
+                src="assets/skills/proteus.png"
+                alt="PROTEUS"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">PROTEUS</span></span
+            >
+          </button>
+          <button
+            class="skill-badge badge-arduinoide"
+            data-skill="arduinoide"
+            data-label="ARDUINOIDE"
+            data-title="ARDUINO IDE"
+            data-desc="Menulis dan mengupload program ke board mikrokontroler untuk project IoT"
+          >
+            <span class="skill-icon"
+              ><img
+                class="arduinoide"
+                src="assets/skills/arduino.png"
+                alt="ArduinoIDE"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">ArduinoIDE</span></span
+            >
+          </button>
+          <button
+            class="skill-badge badge-excel"
+            data-skill="excel"
+            data-label="EXCEL"
+            data-title="EXCEL"
+            data-desc="Mengolah, menghitung, dan menyajikan data dalam bentuk tabel maupun grafik serta penggunaan formula seperti sum, vlookup, xlookup, dan pivot table"
+          >
+            <span class="skill-icon"
+              ><img
+                class="excel"
+                src="assets/skills/excel.png"
+                alt="Excel"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">EXCEL</span></span
+            >
+          </button>
+          <button
+            class="skill-badge badge-vscode"
+            data-skill="vscode"
+            data-label="VS CODE"
+            data-title="VS CODE"
+            data-desc="Code editor utama untuk dalam membuat dan mengembangkan website"
+          >
+            <span class="skill-icon"
+              ><img
+                src="assets/skills/vscode.png"
+                alt="VS Code"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">VS Code</span></span
+            >
+          </button>
+          <button
+            class="skill-badge badge-canva"
+            data-skill="canva"
+            data-label="CANVA"
+            data-title="CANVA"
+            data-desc="Membuat desain visual seperti poster, sertifikat, dan materi presentasi."
+          >
+            <span class="skill-icon"
+              ><img
+                class="canva"
+                src="assets/skills/canva.png"
+                alt="Canva"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">Canva</span></span
+            >
+          </button>
+          <button
+            class="skill-badge badge-cisco"
+            data-skill="cisco"
+            data-label="CISCO"
+            data-title="CISCO PACKET TRACER"
+            data-desc="Merancang dan mensimulasikan topologi jaringan komputer."
+          >
+            <span class="skill-icon"
+              ><img
+                src="assets/skills/cisco.png"
+                alt="cisco"
+                width="46"
+                height="46"
+                loading="lazy"
+                decoding="async"
+                onerror="
+                  this.style.display = 'none';
+                  this.parentElement.classList.add('icon-fallback');
+                "
+              /><span class="icon-fallback-text">CISCO</span></span
+            >
+          </button>
+          <div class="skills-center" id="skillsCenter">
+            <div class="skills-center-face skills-center-default">
+              <svg
+                class="gear-main-bg"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+              <div
+                style="
+                  position: relative;
+                  z-index: 2;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <strong>Software</strong>
+                <small>Teknik Komputer</small>
+              </div>
+            </div>
+            <div
+              class="skills-center-face skills-center-info"
+              aria-live="polite"
+            >
+              <div class="skills-center-info-card" id="skillsCenterInfoCard">
+                <p
+                  class="skills-center-info-title"
+                  id="skillsCenterInfoTitle"
+                ></p>
+                <p
+                  class="skills-center-info-desc"
+                  id="skillsCenterInfoDesc"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="section projects-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">03 — PROJECT</p>
+          <h2>Project yang<br /><em>pernah dibuat.</em></h2>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card reveal" data-project="iotair">
+            <div class="project-image gradient-one">
+              <img
+                src="assets/projects/iotair/iot-debit1.jpg"
+                alt="IoT-Air"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="project-mockup">
+                SISTEM IOT PENGHITUNG PEMAKAIAN AIR DI RUMAH KOS
+              </div>
+            </div>
+            <div class="project-info">
+              <div><span>2026</span><span>IoT • ESP32 • Web</span></div>
+              <h3>Sistem IoT Penghitung dan Pembagian Tagihan Air</h3>
+              <p>
+                Project sistem IoT yang diimplementasikan pada rumah kos dalam
+                menghitung pemakaian dan pembagian tagihan air setiap penghuni
+                kos yang terintegrasi berbasis website dan mikrokontroler
+                ESP32-DevKit.
+              </p>
+              <button type="button" class="project-detail-link">
+                Lihat Selengkapnya
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-1" data-project="webzoeya">
+            <div class="project-image gradient-two">
+              <img
+                src="assets/projects/webzoeya/zoeya-1.jpg"
+                alt="Personal Portofolio"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="project-mockup">PORTOFOLIO</div>
+            </div>
+            <div class="project-info">
+              <div>
+                <span>2026</span><span>Digitalisasi Print • PHP Native </span>
+              </div>
+              <h3>Zoeya Print Website</h3>
+              <p>
+                Project mata kuliah Pemrograman Berbasis Web dengan membangun
+                website Zoeya Print, sebuah website layanan percetakan dengan
+                konsep desain yang simple, clean, dan mudah digunakan.
+              </p>
+              <button type="button" class="project-detail-link">
+                Lihat Selengkapnya
+              </button>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2" data-project="iotcupang">
+            <div class="project-image gradient-three">
+              <img
+                src="assets/projects/iotcupang/iot-cupang1.jpg"
+                alt="IoT Ikan Cupang"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="project-mockup">
+                Sistem IoT Pemberi Pakan Ikan Cupang Otomatis
+              </div>
+            </div>
+            <div class="project-info">
+              <div><span>2025</span><span>IoT • ESP32 • Blnyk</span></div>
+              <h3>Sistem IoT Pakan Ikan Cupang Otomatis</h3>
+              <p>
+                Project sistem IoT yang diimplementasikan pada ikan cupang dalam
+                memberikan pakan secara otomatis dengan berbasis Blnyk dan
+                mikrokontroler ESP32-DevKit.
+              </p>
+              <button type="button" class="project-detail-link">
+                Lihat Selengkapnya
+              </button>
+            </div>
+          </article>
+          <article class="project-card reveal delay-2" data-project="jarkom">
+            <div class="project-image gradient-three">
+              <img
+                src="assets/projects/jarkom/jarkom-1.jpg"
+                alt="Project Jarkom Lokal"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="project-mockup">Management Jarkom Lokal</div>
+            </div>
+            <div class="project-info">
+              <div><span>2025</span><span>Jarkom • CISCO • Local</span></div>
+              <h3>Management Jaringan Komputer Lokal</h3>
+              <p>
+                Project tugas MK Jarkom dalam mengelola jaringan komputer lokal
+                dengan menggunakan simulasi software Cisco Packet Tracer
+              </p>
+              <button type="button" class="project-detail-link">
+                Lihat Selengkapnya
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">portofolio<span>.</span></div>
+      <div class="footer-copy">
+        Copyright © <span id="year"></span> <strong>M. Rafli Saputra</strong>.
+        All rights reserved.
+      </div>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+    <div class="modal" id="projectModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="project"></div>
+      <div class="modal-panel">
+        <button class="modal-close" data-close="project">×</button>
+        <div class="modal-head">
+          <p id="modalKicker">PROJECT</p>
+          <h2 id="modalTitle">Project Title</h2>
+        </div>
+        <div class="project-gallery-wrap">
+          <div class="project-gallery-track" id="gallery"></div>
+        </div>
+        <div class="modal-description">
+          <p id="modalDescription"></p>
+          <div class="modal-tags" id="modalTags"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILL MODAL -->
+    <div class="modal" id="skillModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="skill"></div>
+      <div class="modal-panel">
+        <button class="modal-close" data-close="skill">×</button>
+        <div class="modal-head">
+          <p id="skillKicker">SKILL</p>
+          <h2 id="skillTitle">Skill Title</h2>
+        </div>
+        <div class="gallery" id="skillGallery"></div>
+        <div class="modal-description">
+          <p id="skillDescription"></p>
+          <div class="modal-tags" id="skillTags"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTATION MODAL (curved scroll gallery) -->
+    <div class="modal" id="docModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="doc"></div>
+      <div class="modal-panel doc-panel">
+        <button class="modal-close" data-close="doc">×</button>
+        <div class="modal-head">
+          <p id="docKicker">DOKUMENTASI</p>
+          <h2 id="docTitle">Dokumentasi</h2>
+        </div>
+        <div class="doc-arc-wrap">
+          <button
+            class="doc-nav doc-prev"
+            id="docPrev"
+            aria-label="Geser ke kiri"
+          >
+            ←
+          </button>
+          <div class="doc-arc" id="docArc"></div>
+          <button
+            class="doc-nav doc-next"
+            id="docNext"
+            aria-label="Geser ke kanan"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTATION PHOTO DETAIL MODAL: dibuka lewat tombol "Lihat Detail" pada setiap foto dokumentasi -->
+    <div class="modal" id="docDetailModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="docDetail"></div>
+      <div class="modal-panel doc-detail-panel">
+        <button class="modal-close" data-close="docDetail">×</button>
+        <div class="modal-head">
+          <p id="docDetailKicker">DETAIL FOTO</p>
+          <h2 id="docDetailTitle">Detail</h2>
+        </div>
+        <div class="doc-detail-main">
+          <img id="docDetailMainImg" src="" alt="Foto utama" />
+        </div>
+        <p class="doc-detail-caption" id="docDetailCaption"></p>
+        <div class="doc-detail-sub-label"></div>
+        <div class="gallery" id="docDetailGallery"></div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX: klik foto apapun (profil, kartu about, galeri project/dokumentasi) untuk melihatnya secara penuh -->
+    <div class="modal lightbox-modal" id="lightboxModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="lightbox"></div>
+      <button class="modal-close lightbox-close" data-close="lightbox">
+        ×
+      </button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="Tampilan penuh" />
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
