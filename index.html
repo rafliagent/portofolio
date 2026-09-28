@@ -11,20 +11,35 @@
     <meta property="og:description" content="Fresh Graduate Teknik Komputer — Web Developer, IoT, Networking." />
     <meta property="og:type" content="website" />
     <title>Portofolio | M. Rafli Saputra</title>
-    <!-- Fonts: preconnect + swap for faster LCP -->
+    <!-- Fonts: preconnect + non-blocking async load for instant FCP (<0.5s) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
-    <!-- Preload LCP image -->
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <!-- Preload critical LCP image & CSS -->
     <link
       rel="preload"
       as="image"
       href="assets/profile.jpg"
+      type="image/jpeg"
       fetchpriority="high"
     />
+    <link rel="preload" as="style" href="style.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -105,6 +120,7 @@
                   alt="Instagram"
                   width="40"
                   height="40"
+                  loading="lazy"
                   decoding="async"
                   onerror="
                     this.style.display = 'none';
@@ -124,6 +140,7 @@
                   alt="WhatsApp"
                   width="40"
                   height="40"
+                  loading="lazy"
                   decoding="async"
                   onerror="
                     this.style.display = 'none';
@@ -143,6 +160,7 @@
                   alt="Email"
                   width="40"
                   height="40"
+                  loading="lazy"
                   decoding="async"
                   onerror="
                     this.style.display = 'none';
@@ -162,6 +180,7 @@
                   alt="Linkedin"
                   width="40"
                   height="40"
+                  loading="lazy"
                   decoding="async"
                   onerror="
                     this.style.display = 'none';
