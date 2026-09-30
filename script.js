@@ -318,7 +318,7 @@ const projectData = {
     kicker: "IoT • ESP32 • Web",
     title: "Sistem IoT Penghitung dan Pembagian Tagihan Air",
     description:
-      "Project ini merupakan tugas akhir yang saya buat berupa sistem monitoring dan perhitungan pemakaian air PDAM pada rumah kos menggunakan MCU ESP32 dan sensor water flow YF-S201. Sistem ini mencatat volume penggunaan air setiap kamar, menghitung tagihan berdasarkan tarif PDAM Tirta Musi, serta melakukan pembagian tagihan sesuai pemakaian masing-masing penghuni pada setiap tanggal 5 setiap bulannya. Seluruh data dapat dipantau melalui website yang dilengkapi sistem multi-role, sehingga pengelola dan penghuni memiliki akses sesuai kebutuhan. Sistem ini menjadi salah satu upaya untuk mengembangkan proses pencatatan dan pengelolaan tagihan air yang sebelumnya dilakukan secara konvensional menjadi digital, lebih transparan, akurat, dan efisien. Silahkan Kontak saya jika ingin mengakses website dari project ini: https://bedengku-air.vercel.app/",
+      'Project ini merupakan tugas akhir yang saya buat berupa sistem monitoring dan perhitungan pemakaian air PDAM pada rumah kos menggunakan MCU ESP32 dan sensor water flow YF-S201. Sistem ini mencatat volume penggunaan air setiap kamar, menghitung tagihan berdasarkan tarif PDAM Tirta Musi, serta melakukan pembagian tagihan sesuai pemakaian masing-masing penghuni pada setiap tanggal 5 setiap bulannya. Seluruh data dapat dipantau melalui website yang dilengkapi sistem multi-role, sehingga pengelola dan penghuni memiliki akses sesuai kebutuhan. Sistem ini menjadi salah satu upaya untuk mengembangkan proses pencatatan dan pengelolaan tagihan air yang sebelumnya dilakukan secara konvensional menjadi digital, lebih transparan, akurat, dan efisien. Silahkan Kontak saya jika ingin mengakses website dari project ini: <a href="https://bedengku-air.vercel.app/" target="_blank" rel="noopener noreferrer">https://bedengku-air.vercel.app/</a>',
     tags: ["Internet of Things", "Otomisasi", "PDAM", "UMKM"],
     images: [
       "assets/projects/iotair/iot-debit2.jpg",
@@ -425,7 +425,7 @@ function openProject(key) {
   const data = projectData[key];
   modalTitle.textContent = data.title;
   modalKicker.textContent = data.kicker;
-  modalDescription.textContent = data.description;
+  modalDescription.innerHTML = data.description;
   modalTags.innerHTML = data.tags.map((t) => `<span>${t}</span>`).join("");
 
   if (stopGalleryAutoScroll) {
