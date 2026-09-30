@@ -44,17 +44,18 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
 });
 // Close menu when clicking outside on mobile
 document.addEventListener("click", (e) => {
-  if (navLinks.classList.contains("open") &&
-      !navLinks.contains(e.target) &&
-      !menuToggle.contains(e.target)) {
+  if (
+    navLinks.classList.contains("open") &&
+    !navLinks.contains(e.target) &&
+    !menuToggle.contains(e.target)
+  ) {
     navLinks.classList.remove("open");
     menuToggle.setAttribute("aria-expanded", "false");
   }
 });
 
-
 // Cursor glow: only activate on non-touch (pointer: fine) devices
-const isTouchDevice = window.matchMedia('(hover: none)').matches;
+const isTouchDevice = window.matchMedia("(hover: none)").matches;
 if (!isTouchDevice && cursorGlow) {
   let mouseX = -1000,
     mouseY = -1000,
@@ -317,7 +318,7 @@ const projectData = {
     kicker: "IoT • ESP32 • Web",
     title: "Sistem IoT Penghitung dan Pembagian Tagihan Air",
     description:
-      "Project ini merupakan tugas akhir yang saya buat berupa sistem monitoring dan perhitungan pemakaian air PDAM pada rumah kos menggunakan MCU ESP32 dan sensor water flow YF-S201. Sistem ini mencatat volume penggunaan air setiap kamar, menghitung tagihan berdasarkan tarif PDAM Tirta Musi, serta melakukan pembagian tagihan sesuai pemakaian masing-masing penghuni pada setiap tanggal 5 setiap bulannya. Seluruh data dapat dipantau melalui website yang dilengkapi sistem multi-role, sehingga pengelola dan penghuni memiliki akses sesuai kebutuhan. Sistem ini menjadi salah satu upaya untuk mengembangkan proses pencatatan dan pengelolaan tagihan air yang sebelumnya dilakukan secara konvensional menjadi digital, lebih transparan, akurat, dan efisien.",
+      "Project ini merupakan tugas akhir yang saya buat berupa sistem monitoring dan perhitungan pemakaian air PDAM pada rumah kos menggunakan MCU ESP32 dan sensor water flow YF-S201. Sistem ini mencatat volume penggunaan air setiap kamar, menghitung tagihan berdasarkan tarif PDAM Tirta Musi, serta melakukan pembagian tagihan sesuai pemakaian masing-masing penghuni pada setiap tanggal 5 setiap bulannya. Seluruh data dapat dipantau melalui website yang dilengkapi sistem multi-role, sehingga pengelola dan penghuni memiliki akses sesuai kebutuhan. Sistem ini menjadi salah satu upaya untuk mengembangkan proses pencatatan dan pengelolaan tagihan air yang sebelumnya dilakukan secara konvensional menjadi digital, lebih transparan, akurat, dan efisien. Silahkan Kontak saya jika ingin mengakses website dari project ini: https://bedengku-air.vercel.app/",
     tags: ["Internet of Things", "Otomisasi", "PDAM", "UMKM"],
     images: [
       "assets/projects/iotair/iot-debit2.jpg",
@@ -593,9 +594,7 @@ function updateSkillsConnector(badge) {
 
   // Detect scale factor of skillsStage (due to CSS transform: scale(...))
   const scaleX =
-    skillsStage.offsetWidth > 0
-      ? stageRect.width / skillsStage.offsetWidth
-      : 1;
+    skillsStage.offsetWidth > 0 ? stageRect.width / skillsStage.offsetWidth : 1;
   const scaleY =
     skillsStage.offsetHeight > 0
       ? stageRect.height / skillsStage.offsetHeight
@@ -617,17 +616,13 @@ function updateSkillsConnector(badge) {
   // Use each element's unscaled layout size for half extents
   const badgeHalfW = badge.offsetWidth / 2;
   const badgeHalfH = badge.offsetHeight / 2;
-  const cardHalfW =
-    (cardEl ? cardEl.offsetWidth : cardRect.width / scaleX) / 2;
+  const cardHalfW = (cardEl ? cardEl.offsetWidth : cardRect.width / scaleX) / 2;
   const cardHalfH =
     (cardEl ? cardEl.offsetHeight : cardRect.height / scaleY) / 2;
 
   const start = rectEdgePoint(ax, ay, badgeHalfW, badgeHalfH, ux, uy);
   const end = rectEdgePoint(bx, by, cardHalfW, cardHalfH, -ux, -uy);
-  const trimmedDist = Math.max(
-    0,
-    Math.hypot(end.x - start.x, end.y - start.y),
-  );
+  const trimmedDist = Math.max(0, Math.hypot(end.x - start.x, end.y - start.y));
 
   skillsConnectorLine.style.width = `${trimmedDist}px`;
   skillsConnectorLine.style.left = `${start.x}px`;
